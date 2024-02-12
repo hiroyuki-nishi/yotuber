@@ -8,10 +8,17 @@ import Typography from '@mui/material/Typography';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 
+enum LiveStatus {
+  Schedule = 0,
+  Live = 1,
+  Exit = 99,
+}
+
 interface Thumnail {
   url: string,
   createdAt: string,
   title: string,
+  liveStatus: LiveStatus
 }
 
 export default function Home() {
@@ -20,18 +27,34 @@ export default function Home() {
       url: "http://img.youtube.com/vi/AuQov5W65LY/mqdefault.jpg",
       createdAt: "2/12 09:00",
       title: "マイクラバトミントンリーグ",
+      liveStatus: LiveStatus.Schedule,
     },
     {
       url: "http://img.youtube.com/vi/jHRlw1e3YEg/mqdefault.jpg",
       createdAt: "2/11 18:00",
       title: "逆転裁判4",
+      liveStatus: LiveStatus.Live,
     },
     {
       url: "http://img.youtube.com/vi/PFjnhRsJgHU/mqdefault.jpg",
       createdAt: "2/10 21:00",
       title: "私の酸素を吸わないでほしい ／ Vo.羽渦ミウネル",
+      liveStatus: LiveStatus.Exit,
     },
   ];
+
+  const liveStatusComponent = (liveStatus: LiveStatus) => {
+    switch (liveStatus) {
+      case LiveStatus.Schedule:
+        return <p className="bg-blue-600">配信予定</p>;
+      case LiveStatus.Live:
+        return <p className="bg-red-600">配信中</p>;
+      case LiveStatus.Exit:
+        return <p className="bg-gray-300">配信終了</p>;
+      default:
+        return;
+    }
+  }
 
   const cardComponent = (thumnail: Thumnail, key: number) => (
     <Card key={key} sx={{ width: 300 }}>
@@ -40,12 +63,19 @@ export default function Home() {
           <AccessTimeIcon />
           <span className="ml-2">{thumnail.createdAt}</span>
         </Typography>
-        <Typography variant="body2">
-          <img
-            src={`${thumnail.url}`}
-            alt="サムネイル"
-          />
-        </Typography>
+
+        <div className="relative">
+          <Typography variant="body2">
+            <img
+              src={`${thumnail.url}`}
+              alt="サムネイル"
+            />
+          </Typography>
+          <div className="absolute bottom-1 right-0 w-20 text-sm text-white	text-center">
+            {liveStatusComponent(thumnail.liveStatus)}
+          </div>
+        </div>
+
         <Typography className="font-bold mt-2 flex items-center">
           <YouTubeIcon className="text-red-600"/>
           <span className="ml-2">{thumnail.title}</span>
