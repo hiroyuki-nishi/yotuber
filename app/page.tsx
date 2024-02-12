@@ -1,6 +1,4 @@
-import Image from "next/image";
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,9 +6,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 export default function Home() {
-  const list = Array.from({length: 100}, (v, k) => k);
+  const list = Array.from({length: 3}, (v, k) => k);
   const card = (
-  <Card sx={{ minWidth: 275 }}>
+  <Card sx={{ width: 275 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Title
@@ -34,7 +32,9 @@ export default function Home() {
   )
   return (
     <>
+    <div className="flex">
       { list.map((x, i) => card) }
+    </div>
     </>
   );
 }
