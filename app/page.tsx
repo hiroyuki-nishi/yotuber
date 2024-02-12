@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -50,6 +50,14 @@ export default function Home() {
     },
   ];
 
+  const TitleComponent = ({children}) => {
+    return (
+      <div className="pt-6 flex justify-center items-center">
+        {children}
+      </div>
+    );
+  }
+
   const liveStatusComponent = (liveStatus: LiveStatus) => {
     switch (liveStatus) {
       case LiveStatus.Schedule:
@@ -98,11 +106,30 @@ export default function Home() {
         </div>
       </CardActions>
     </Card>
-  )
+  );
+
   return (
     <>
-      <div className="h-screen w-screen flex justify-center items-center">
-        <div className="flex">
+      <div className="h-screen w-screen">
+        <div>
+          <TitleComponent>
+            <h2 className="text-8xl font-extrabold">VOMS.net</h2>
+          </TitleComponent>
+
+          <TitleComponent>
+            <h3 className="font-extrabold">VTuber “VOMS Project” Official Web Site</h3>
+          </TitleComponent>
+
+          <TitleComponent>
+            <h3 className="text-2xl font-extrabold">Live Schedule</h3>
+          </TitleComponent>
+        </div>
+
+        {/* <div>
+          { titleComponent("VTuber “VOMS Project” Official Web Site")}
+        </div> */}
+
+        <div className="flex  justify-center items-center">
           {thumnails.map(cardComponent)}
         </div>
       </div>
