@@ -2,7 +2,6 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -18,7 +17,9 @@ interface Thumnail {
   url: string,
   createdAt: string,
   title: string,
-  liveStatus: LiveStatus
+  liveStatus: LiveStatus,
+  liveChanel: string,
+  liveActor: string,
 }
 
 export default function Home() {
@@ -28,18 +29,24 @@ export default function Home() {
       createdAt: "2/12 09:00",
       title: "マイクラバトミントンリーグ",
       liveStatus: LiveStatus.Schedule,
+      liveChanel: "xxx",
+      liveActor: "",
     },
     {
       url: "http://img.youtube.com/vi/jHRlw1e3YEg/mqdefault.jpg",
       createdAt: "2/11 18:00",
       title: "逆転裁判4",
       liveStatus: LiveStatus.Live,
+      liveChanel: "xxx",
+      liveActor: "",
     },
     {
       url: "http://img.youtube.com/vi/PFjnhRsJgHU/mqdefault.jpg",
       createdAt: "2/10 21:00",
       title: "私の酸素を吸わないでほしい ／ Vo.羽渦ミウネル",
       liveStatus: LiveStatus.Exit,
+      liveChanel: "xxx",
+      liveActor: "",
     },
   ];
 
@@ -57,8 +64,8 @@ export default function Home() {
   }
 
   const cardComponent = (thumnail: Thumnail, key: number) => (
-    <Card key={key} sx={{ width: 300 }}>
-      <CardContent>
+    <Card key={key} sx={{ width: 300 }} className="ml-4">
+      <CardContent className="border-b">
         <Typography className="font-bold mb-2 flex items-center">
           <AccessTimeIcon />
           <span className="ml-2">{thumnail.createdAt}</span>
@@ -81,8 +88,14 @@ export default function Home() {
           <span className="ml-2">{thumnail.title}</span>
         </Typography>
       </CardContent>
+
       <CardActions>
-        <Button size="small">xxx</Button>
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 text-xs ml-2 h-14">
+          <div className="font-bold">配信ch</div>
+          <div>{thumnail.liveChanel}</div>
+          <div className="font-bold">出演</div>
+          <div>{thumnail.liveActor}</div>
+        </div>
       </CardActions>
     </Card>
   )
