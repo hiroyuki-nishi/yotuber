@@ -32,9 +32,11 @@ export default function Home() {
   )
   return (
     <>
-    <div className="flex">
-      { list.map((x, i) => card) }
-    </div>
+      <div className="h-screen w-screen flex justify-center items-center">
+        <div className="flex">
+          {list.map((x, i) => card)}
+        </div>
+      </div>
     </>
   );
 }
