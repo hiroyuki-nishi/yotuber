@@ -125,9 +125,7 @@ export default function Home() {
           </TitleComponent>
         </div>
 
-        {/* <div>
-          { titleComponent("VTuber “VOMS Project” Official Web Site")}
-        </div> */}
+        {/* TODO: メニューを実装する */}
 
         <div className="flex  justify-center items-center">
           {thumnails.map(cardComponent)}
