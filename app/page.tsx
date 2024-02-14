@@ -65,6 +65,7 @@ export default function Home() {
 
   const cardComponent = (thumnail: Thumnail, key: number) => (
     <Card key={key} sx={{ width: 300 }} className="ml-4">
+      aaaaaaaaa
       <CardContent className="border-b">
         <Typography className="font-bold mb-2 flex items-center">
           <AccessTimeIcon />
