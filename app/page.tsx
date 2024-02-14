@@ -113,7 +113,7 @@ export default function Home() {
       <div className="h-screen w-screen">
         <div>
           <TitleComponent>
-            <h2 className="text-8xl font-extrabold">VOMS.net</h2>
+            <h2 className="text-8xl font-extrabold">VOMS.net2</h2>
           </TitleComponent>
 
           <TitleComponent>
