@@ -141,10 +141,11 @@ export default function Home() {
               </TitleComponent>
             </div>
 
-            <div className="flex items-center p-30px justify-end">
+            <div className="flex items-center p-20px justify-end">
               <Link href="/">#voms_project</Link>
-              <div className="pl-28">
-                <TwitterIcon />
+              <div className="pl-20">
+                <span>share</span>
+                <TwitterIcon color="primary" className="ml-2"/>
               </div>
               <IconButton
                 className="mr-28"
@@ -155,7 +156,7 @@ export default function Home() {
                 aria-haspopup="true"
                 onClick={handleClick}
               >
-                <MenuIcon sx={{ fontSize: 40 }}/>
+                <MenuIcon sx={{ fontSize: 48 }}/>
               </IconButton>
               <Menu
                 id="long-menu"
