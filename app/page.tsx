@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useState } from "react";
+import React, {useState} from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -8,9 +7,10 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import MenuIcon from '@mui/icons-material/Menu';
 
 enum LiveStatus {
   Schedule = 0,
@@ -132,13 +132,19 @@ export default function Home() {
     <>
       <div className="h-screen w-screen">
         <div>
-          <div className="flex justify-center">
-            <TitleComponent>
-              <h2 className="text-8xl font-extrabold">VOMS.net</h2>
-            </TitleComponent>
-
-            {/* TODO: リファクタリングする */}
+          <div className="grid grid-cols-3 gap-4">
+            <div></div>
             <div>
+              <TitleComponent>
+                <h2 className="text-8xl font-extrabold">VOMS.net</h2>
+              </TitleComponent>
+            </div>
+
+            <div className="flex items-center p-30px justify-end">
+                #voms_project
+              <div>
+                <TwitterIcon />
+              </div>
               <IconButton
                 aria-label="more"
                 id="long-button"
@@ -147,7 +153,7 @@ export default function Home() {
                 aria-haspopup="true"
                 onClick={handleClick}
               >
-                <MoreVertIcon />
+                <MenuIcon />
               </IconButton>
               <Menu
                 id="long-menu"
