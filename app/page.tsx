@@ -11,6 +11,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import MenuIcon from '@mui/icons-material/Menu';
+import Link from "next/link";
 
 enum LiveStatus {
   Schedule = 0,
@@ -141,11 +142,12 @@ export default function Home() {
             </div>
 
             <div className="flex items-center p-30px justify-end">
-                #voms_project
-              <div>
+              <Link href="/">#voms_project</Link>
+              <div className="pl-28">
                 <TwitterIcon />
               </div>
               <IconButton
+                className="mr-28"
                 aria-label="more"
                 id="long-button"
                 aria-controls={open ? 'long-menu' : undefined}
@@ -153,7 +155,7 @@ export default function Home() {
                 aria-haspopup="true"
                 onClick={handleClick}
               >
-                <MenuIcon />
+                <MenuIcon sx={{ fontSize: 40 }}/>
               </IconButton>
               <Menu
                 id="long-menu"
