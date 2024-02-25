@@ -1,11 +1,17 @@
-import React from "react";
+"use client";
+import React, {useState} from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import MenuIcon from '@mui/icons-material/Menu';
+import Link from "next/link";
 
 enum LiveStatus {
   Schedule = 0,
@@ -23,6 +29,8 @@ interface Thumnail {
 }
 
 export default function Home() {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
   const thumnails: Thumnail[] = [
     {
       url: "http://img.youtube.com/vi/AuQov5W65LY/mqdefault.jpg",
@@ -50,13 +58,18 @@ export default function Home() {
     },
   ];
 
-  const TitleComponent = ({children}) => {
+  const TitleComponent = ({ children }) => {
     return (
       <div className="pt-6 flex justify-center items-center">
         {children}
       </div>
     );
   }
+
+  const options = [
+    "Concept",
+    "Videos",
+  ];
 
   const liveStatusComponent = (liveStatus: LiveStatus) => {
     switch (liveStatus) {
@@ -92,7 +105,7 @@ export default function Home() {
         </div>
 
         <Typography className="font-bold mt-2 flex items-center">
-          <YouTubeIcon className="text-red-600"/>
+          <YouTubeIcon className="text-red-600" />
           <span className="ml-2">{thumnail.title}</span>
         </Typography>
       </CardContent>
@@ -108,13 +121,66 @@ export default function Home() {
     </Card>
   );
 
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <>
       <div className="h-screen w-screen">
         <div>
-          <TitleComponent>
-            <h2 className="text-8xl font-extrabold">VOMS.net2</h2>
-          </TitleComponent>
+          <div className="grid grid-cols-3 gap-4">
+            <div></div>
+            <div>
+              <TitleComponent>
+                <h2 className="text-8xl font-extrabold">VOMS.net</h2>
+              </TitleComponent>
+            </div>
+
+            <div className="flex items-center p-20px justify-end">
+              <Link href="/">#voms_project</Link>
+              <div className="pl-20">
+                <span>share</span>
+                <TwitterIcon color="primary" className="ml-2"/>
+              </div>
+              <IconButton
+                className="mr-28"
+                aria-label="more"
+                id="long-button"
+                aria-controls={open ? 'long-menu' : undefined}
+                aria-expanded={open ? 'true' : undefined}
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <MenuIcon sx={{ fontSize: 48 }}/>
+              </IconButton>
+              <Menu
+                id="long-menu"
+                MenuListProps={{
+                  'aria-labelledby': 'long-button',
+                }}
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                  style: {
+                    maxHeight: 48 * 4.5,
+                    width: '20ch',
+                  },
+                }}
+              >
+                {options.map((option) => (
+                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Menu>
+            </div>
+          </div>
 
           <TitleComponent>
             <h3 className="font-extrabold">VTuber “VOMS Project” Official Web Site</h3>
