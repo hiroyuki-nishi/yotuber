@@ -70,9 +70,9 @@ const TitleComponent = ({ children }: Props ) => {
     );
   }
 
-  const options = [
-    "Concept",
-    "Videos",
+  const menuOptions = [
+    { name: "VOMS.net", link: "/" },
+    { name: "Concept", link: "" },
   ];
 
   const liveStatusComponent = (liveStatus: LiveStatus) => {
@@ -177,11 +177,16 @@ const TitleComponent = ({ children }: Props ) => {
                   },
                 }}
               >
-                {options.map((option) => (
-                  <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
-                    {option}
-                  </MenuItem>
-                ))}
+                {
+                  menuOptions.map((option) => (
+                    <MenuItem
+                      key={option.name}
+                      onClick={handleClose}
+                    >
+                      <Link href={option.link}>{option.name}</Link>
+                    </MenuItem>
+                  ))
+                }
               </Menu>
             </div>
           </div>
