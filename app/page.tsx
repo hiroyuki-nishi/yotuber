@@ -58,7 +58,11 @@ export default function Home() {
     },
   ];
 
-  const TitleComponent = ({ children }) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const TitleComponent = ({ children }: Props ) => {
     return (
       <div className="pt-6 flex justify-center items-center">
         {children}
