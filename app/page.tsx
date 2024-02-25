@@ -13,6 +13,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from "next/link";
 
+
 enum LiveStatus {
   Schedule = 0,
   Live = 1,
@@ -72,7 +73,7 @@ const TitleComponent = ({ children }: Props ) => {
 
   const menuOptions = [
     { name: "VOMS.net", link: "/" },
-    { name: "Concept", link: "" },
+    { name: "Concept", link: "concept" },
   ];
 
   const liveStatusComponent = (liveStatus: LiveStatus) => {
@@ -135,7 +136,11 @@ const TitleComponent = ({ children }: Props ) => {
 
   return (
     <>
-      <div className="h-screen w-screen">
+      <div
+        className="h-screen w-screen"
+        style={
+          { backgroundImage: "url(/background.jpeg)", backgroundSize: "cover", resize: "both" }}
+      >
         <div>
           <div className="grid grid-cols-3 gap-4">
             <div></div>
@@ -200,9 +205,7 @@ const TitleComponent = ({ children }: Props ) => {
           </TitleComponent>
         </div>
 
-        {/* TODO: メニューを実装する */}
-
-        <div className="flex  justify-center items-center">
+        <div className="flex  justify-center">
           {thumnails.map(cardComponent)}
         </div>
       </div>
