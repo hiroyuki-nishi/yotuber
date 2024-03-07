@@ -12,6 +12,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from "next/link";
+import * as CSS from "csstype";
 
 
 enum LiveStatus {
@@ -76,10 +77,15 @@ const TitleComponent = ({ children }: Props ) => {
     { name: "Concept", link: "concept" },
   ];
 
+  const divStyle: CSS.Properties = {
+    textAlign: 'center',
+  }
+
+  // html返す
   const liveStatusComponent = (liveStatus: LiveStatus) => {
     switch (liveStatus) {
       case LiveStatus.Schedule:
-        return <p className="bg-blue-600">配信予定</p>;
+        return <p className="bg-blue-600" style={divStyle}>配信予定</p>;
       case LiveStatus.Live:
         return <p className="bg-red-600">配信中</p>;
       case LiveStatus.Exit:
@@ -89,8 +95,8 @@ const TitleComponent = ({ children }: Props ) => {
     }
   }
 
-  const cardComponent = (thumnail: Thumnail, key: number) => (
-    <Card key={key} sx={{ width: 300 }} className="ml-4">
+  const cardComponent = (thumnail: Thumnail, key: number) => {
+    return (<Card key={key} sx={{ width: 300 }} className="ml-4">
       <CardContent className="border-b">
         <Typography className="font-bold mb-2 flex items-center">
           <AccessTimeIcon />
@@ -124,7 +130,7 @@ const TitleComponent = ({ children }: Props ) => {
         </div>
       </CardActions>
     </Card>
-  );
+  )};
 
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
