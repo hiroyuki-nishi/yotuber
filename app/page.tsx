@@ -30,41 +30,32 @@ interface Thumnail {
   liveActor: string,
 }
 
-export default function Home() {
+
+async function fetchYoutuberData(): Promise<Thumnail[]> {
+  try {
+    const response = await fetch('http://localhost:3001/youtuber');
+    
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data: Thumnail[] = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+}
+
+export default async function Home() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const thumnails: Thumnail[] = [
-    {
-      url: "http://img.youtube.com/vi/AuQov5W65LY/mqdefault.jpg",
-      createdAt: "2/12 09:00",
-      title: "マイクラバトミントンリーグ",
-      liveStatus: LiveStatus.Schedule,
-      liveChanel: "xxx",
-      liveActor: "",
-    },
-    {
-      url: "http://img.youtube.com/vi/jHRlw1e3YEg/mqdefault.jpg",
-      createdAt: "2/11 18:00",
-      title: "逆転裁判4",
-      liveStatus: LiveStatus.Live,
-      liveChanel: "xxx",
-      liveActor: "",
-    },
-    {
-      url: "http://img.youtube.com/vi/PFjnhRsJgHU/mqdefault.jpg",
-      createdAt: "2/10 21:00",
-      title: "私の酸素を吸わないでほしい ／ Vo.羽渦ミウネル",
-      liveStatus: LiveStatus.Exit,
-      liveChanel: "xxx",
-      liveActor: "",
-    },
-  ];
+  const thumnails = await fetchYoutuberData();
+  type Props = {
+    children: React.ReactNode;
+  };
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const TitleComponent = ({ children }: Props ) => {
+  const TitleComponent = ({ children }: Props) => {
     return (
       <div className="pt-6 flex justify-center items-center">
         {children}
@@ -130,7 +121,8 @@ const TitleComponent = ({ children }: Props ) => {
         </div>
       </CardActions>
     </Card>
-  )};
+    )
+  };
 
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -160,7 +152,7 @@ const TitleComponent = ({ children }: Props ) => {
               <Link href="/">#voms_project</Link>
               <div className="pl-20">
                 <span>share</span>
-                <TwitterIcon color="primary" className="ml-2"/>
+                <TwitterIcon color="primary" className="ml-2" />
               </div>
               <IconButton
                 className="mr-28"
@@ -171,7 +163,7 @@ const TitleComponent = ({ children }: Props ) => {
                 aria-haspopup="true"
                 onClick={handleClick}
               >
-                <MenuIcon sx={{ fontSize: 48 }}/>
+                <MenuIcon sx={{ fontSize: 48 }} />
               </IconButton>
               <Menu
                 id="long-menu"
@@ -212,7 +204,7 @@ const TitleComponent = ({ children }: Props ) => {
         </div>
 
         <div className="flex  justify-center">
-          {thumnails.map(cardComponent)}
+          {thumnails?.map(cardComponent)}
         </div>
       </div>
     </>
