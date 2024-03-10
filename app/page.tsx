@@ -1,18 +1,14 @@
-"use client";
-import React, {useState} from "react";
+import React from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import TwitterIcon from '@mui/icons-material/Twitter';
-import MenuIcon from '@mui/icons-material/Menu';
 import Link from "next/link";
 import * as CSS from "csstype";
+import { MenuComponent } from "./menu";
 
 
 enum LiveStatus {
@@ -48,9 +44,8 @@ async function fetchYoutuberData(): Promise<Thumnail[]> {
 }
 
 export default async function Home() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const thumnails = await fetchYoutuberData();
+  
   type Props = {
     children: React.ReactNode;
   };
@@ -125,13 +120,6 @@ export default async function Home() {
   };
 
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   return (
     <>
       <div
@@ -154,43 +142,7 @@ export default async function Home() {
                 <span>share</span>
                 <TwitterIcon color="primary" className="ml-2" />
               </div>
-              <IconButton
-                className="mr-28"
-                aria-label="more"
-                id="long-button"
-                aria-controls={open ? 'long-menu' : undefined}
-                aria-expanded={open ? 'true' : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-              >
-                <MenuIcon sx={{ fontSize: 48 }} />
-              </IconButton>
-              <Menu
-                id="long-menu"
-                MenuListProps={{
-                  'aria-labelledby': 'long-button',
-                }}
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                PaperProps={{
-                  style: {
-                    maxHeight: 48 * 4.5,
-                    width: '20ch',
-                  },
-                }}
-              >
-                {
-                  menuOptions.map((option) => (
-                    <MenuItem
-                      key={option.name}
-                      onClick={handleClose}
-                    >
-                      <Link href={option.link}>{option.name}</Link>
-                    </MenuItem>
-                  ))
-                }
-              </Menu>
+              <MenuComponent></MenuComponent>
             </div>
           </div>
 
